@@ -1,30 +1,4 @@
-ifeq ($(CONFIG_BUILD_ARM64_DT_OVERLAY),y)
-dtbo-$(CONFIG_ARCH_MSM8996) += \
-	msm8996-mtp-overlay.dtbo \
-	msm8996-cdp-overlay.dtbo \
-	apq8096pro-v1.1-auto-adp-overlay.dtbo \
-	apq8096pro-v1.1-auto-adp-lite-overlay.dtbo \
-	msm8996pro-auto-adp-overlay.dtbo \
-	msm8996pro-auto-adp-lite-overlay.dtbo \
-	apq8096pro-auto-cdp-overlay.dtbo \
-	msm8996pro-v1.1-auto-cdp-overlay.dtbo
-
-msm8996-mtp-overlay.dtbo-base :=  msm8996pro-v1.1-pmi8996.dtb \
-				msm8996-v3-pmi8996.dtb \
-				msm8996pro-v1.1-pmi8994.dtb \
-				msm8996-v313-pmi8994.dtb \
-				msm8996-v30-pm8994-pmi8994-pm8004.dtb
-
-msm8996-cdp-overlay.dtbo-base :=  msm8996-v3-pmi8994.dtb \
-				 msm8996pro-pmi8994-pm8004.dtb
-
-apq8096pro-v1.1-auto-adp-overlay.dtbo-base := apq8096pro-v1.1-auto.dtb
-apq8096pro-v1.1-auto-adp-lite-overlay.dtbo-base := apq8096pro-v1.1-auto.dtb
-msm8996pro-auto-adp-overlay.dtbo-base := msm8996pro-auto.dtb
-msm8996pro-auto-adp-lite-overlay.dtbo-base := msm8996pro-auto.dtb
-apq8096pro-auto-cdp-overlay.dtbo-base := apq8096pro-auto.dtb
-msm8996pro-v1.1-auto-cdp-overlay.dtbo-base := msm8996pro-v1.1-auto.dtb
-else
+ifneq ($(CONFIG_PRODUCT_REALME_SDM660),y)
 dtb-$(CONFIG_ARCH_MSM8996) += msm8996-v2-pmi8994-cdp.dtb \
 	msm8996-v2-pmi8994-mtp.dtb \
 	msm8996-v2-pmi8994-pmk8001-cdp.dtb \
@@ -211,7 +185,11 @@ dtb-$(CONFIG_ARCH_MSM8998) += msm8998-sim.dtb \
 endif
 
 dtb-$(CONFIG_ARCH_MSMHAMSTER) += msmhamster-rumi.dtb
+endif
 
+ifeq ($(CONFIG_PRODUCT_REALME_SDM660),y)
+dtb-$(CONFIG_PRODUCT_REALME_RMX1801) += sdm660-pm660a-mtp-RMX1801.dtb
+else
 dtb-$(CONFIG_ARCH_SDM660) += sdm660-sim.dtb \
 	sdm660-internal-codec-cdp.dtb \
 	sdm660-internal-codec-mtp.dtb \
@@ -324,6 +302,7 @@ dtb-$(CONFIG_ARCH_SDM630) += sdm630-rumi.dtb \
 	sdm455-cdp.dtb \
 	sdm455-rcm.dtb \
 	sdm455-internal-codec-rcm.dtb
+endif
 
 ifeq ($(CONFIG_ARM64),y)
 always          := $(dtb-y)
